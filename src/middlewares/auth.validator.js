@@ -12,7 +12,9 @@ const verifyJWT = async (req, res, next) => {
 				'authorization': token
 			}
 		});
-		req.user = verifiedResponse.data;
+		req.user = {
+			id: verifiedResponse.data.id,
+		};
 		next();
 	} catch(error) {
 		// console.log(error);
