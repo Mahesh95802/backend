@@ -9,8 +9,17 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
-			object: {
-				type: Sequelize.JSONB
+			value: {
+				type: Sequelize.STRING
+			},
+			contentSchemaId: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: {
+					model: 'ContentSchemas',
+					key: 'id'
+				},
+				onDelete: 'CASCADE',
 			},
 			userId: {
 				allowNull: false,

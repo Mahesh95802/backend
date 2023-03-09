@@ -11,13 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
 		static associate(models) {
 			// define association here
-			this.belongsTo(models.ContentType, { foreignKey: 'contentTypeId' });
+			this.belongsTo(models.ContentType, { foreignKey: 'contentTypeId', onDelete: 'CASCADE', hooks: true });
+			this.belongsTo(models.ContentSchema, { foreignKey: 'contentSchemaId', onDelete: 'CASCADE', hooks: true });
 		}
 	}
 	Collection.init({
-		object: DataTypes.JSONB,
+		value: DataTypes.STRING,
+		contentSchemaId: DataTypes.INTEGER,
+		contentTypeId: DataTypes.INTEGER,
 		userId: DataTypes.INTEGER,
-		contentTypeId: DataTypes.INTEGER
 	}, {
 		sequelize,
 		modelName: 'Collection',

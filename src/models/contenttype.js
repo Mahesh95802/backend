@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
 		static associate(models) {
 			// define association here
-			this.hasMany(models.ContentSchema, { foreignKey: 'contentTypeId' });
-			this.hasMany(models.Collection, { foreignKey: 'contentTypeId' });
+			this.hasMany(models.ContentSchema, { foreignKey: 'contentTypeId', onDelete: 'CASCADE', hooks: true });
+			this.hasMany(models.Collection, { foreignKey: 'contentTypeId', onDelete: 'CASCADE', hooks: true });
 		}
 	}
 	ContentType.init({
