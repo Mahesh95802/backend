@@ -1,6 +1,6 @@
-const { ContentType, ContentSchema } = require('../models');
+const { ContentType, ContentSchema, Collection } = require('../models');
 
-const sequelize = require('sequelize');
+// const sequelize = require('sequelize');
 
 const getAllContentTypes = async (id) => {
 	return await ContentType.findAll({
@@ -8,6 +8,10 @@ const getAllContentTypes = async (id) => {
 		attributes: ['id', 'name'],
 		include: [{
 			model: ContentSchema,
+			attributes: ['id'],
+			required: false,
+		}, {
+			model: Collection,
 			attributes: ['id'],
 			required: false,
 		}]
