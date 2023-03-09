@@ -14,7 +14,7 @@ app.use(cors());
 const PORT = process.env.PORT || 4000;
 
 app.use('/content-types', authValidator.verifyJWT, contentTypeRouter);
-app.use('/schema/content-types', authValidator.verifyJWT, contentSchemaRouter);
+app.use('/schema', authValidator.verifyJWT, contentSchemaRouter);
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');

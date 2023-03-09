@@ -17,7 +17,7 @@ const postContentType = async (req, res) => {
 			name: req.body.name,
 			userId: req.user.id
 		});
-		res.status(200).json(response);
+		res.status(201).json(response);
 	} catch (error) {
 		if(error instanceof HTTPError) return res.status(error.statusCode).json({ error: error.message });
 		res.status(500).json({ error: error.message });

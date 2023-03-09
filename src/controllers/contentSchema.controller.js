@@ -15,6 +15,16 @@ const getContentTypeSchema = async (req, res) => {
 const postContentTypeSchema = async (req, res) => {
 	try{
 		const response = await contentSchemaService.postContentTypeSchema(req.body, req.user.id, req.params.contentTypeId);
+		res.status(201).json(response);
+	} catch(error) {
+		if(error instanceof HTTPError) return res.status(error.statusCode).json({ error: error.message });
+		res.status(500).json({ error: error.message });
+	}
+};
+
+const putContentTypeSchema = async (req, res) => {
+	try{
+		const response = await contentSchemaService.putContentTypeSchema(req.body, req.user.id, req.params.contentSchemaId);
 		res.status(200).json(response);
 	} catch(error) {
 		if(error instanceof HTTPError) return res.status(error.statusCode).json({ error: error.message });
@@ -22,4 +32,14 @@ const postContentTypeSchema = async (req, res) => {
 	}
 };
 
-module.exports = { getContentTypeSchema, postContentTypeSchema };
+const deleteContentTypeSchema = async (req, res) => {
+	try{
+		const response = await contentSchemaService.deleteContentTypeSchema(req.params.contentSchemaId, req.user.id);
+		res.status(200).json(response);
+	} catch(error) {
+		if(error instanceof HTTPError) return res.status(error.statusCode).json({ error: error.message });
+		res.status(500).json({ error: error.message });
+	}
+};
+
+module.exports = { getContentTypeSchema, postContentTypeSchema, putContentTypeSchema, deleteContentTypeSchema };
