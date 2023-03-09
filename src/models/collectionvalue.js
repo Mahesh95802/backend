@@ -3,7 +3,7 @@ const {
 	Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-	class Collection extends Model {
+	class CollectionValue extends Model {
 		/**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,17 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
 		static associate(models) {
 			// define association here
-			this.belongsTo(models.ContentType, { foreignKey: 'contentTypeId', onDelete: 'CASCADE', hooks: true });
-			this.hasMany(models.CollectionValue, { foreignKey: 'collectionId', onDelete: 'CASCADE', hooks: true });
+			this.belongsTo(models.Collection, { foreignKey: 'collectionId', onDelete: 'CASCADE', hooks: true });
+			this.belongsTo(models.ContentSchema, { foreignKey: 'contentSchemaId', onDelete: 'CASCADE', hooks: true });
 		}
 	}
-	Collection.init({
+	CollectionValue.init({
 		value: DataTypes.STRING,
-		contentTypeId: DataTypes.INTEGER,
-		userId: DataTypes.INTEGER,
+		collectionId: DataTypes.INTEGER,
+		contentSchemaId: DataTypes.INTEGER
 	}, {
 		sequelize,
-		modelName: 'Collection',
+		modelName: 'CollectionValue',
 	});
-	return Collection;
+	return CollectionValue;
 };

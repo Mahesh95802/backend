@@ -2,21 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable('Collections', {
+		await queryInterface.createTable('CollectionValues', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
-			userId: {
-				allowNull: false,
-				type: Sequelize.INTEGER
+			value: {
+				type: Sequelize.STRING
 			},
-			contentTypeId: {
+			collectionId: {
+				allowNull: false,
 				type: Sequelize.INTEGER,
 				references: {
-					model: 'ContentTypes',
+					model: 'Collections',
+					key: 'id'
+				},
+				onDelete: 'CASCADE',
+			},
+			contentSchemaId: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: {
+					model: 'ContentSchemas',
 					key: 'id'
 				},
 				onDelete: 'CASCADE',
@@ -32,6 +41,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable('Collections');
+		await queryInterface.dropTable('CollectionValues');
 	}
 };
