@@ -5,6 +5,7 @@ const express = require('express');
 const authValidator = require('./middlewares/auth.validator');
 const contentTypeRouter = require('./routes/contentType.route');
 const contentSchemaRouter = require('./routes/contentSchema.route');
+const collectionRouter = require('./routes/collection.route');
 
 const app = express();
 
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use('/content-types', authValidator.verifyJWT, contentTypeRouter);
 app.use('/schema', authValidator.verifyJWT, contentSchemaRouter);
+app.use('/collections', authValidator.verifyJWT, collectionRouter);
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');

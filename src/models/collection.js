@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	}
 	Collection.init({
-		value: DataTypes.STRING,
 		contentTypeId: DataTypes.INTEGER,
 		userId: DataTypes.INTEGER,
 	}, {
