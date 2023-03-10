@@ -8,13 +8,14 @@ const getAllContentTypes = async (id) => {
 		attributes: ['id', 'name'],
 		include: [{
 			model: ContentSchema,
-			attributes: ['id'],
+			attributes: ['id', 'updatedAt'],
 			required: false,
 		}, {
 			model: Collection,
 			attributes: ['id'],
 			required: false,
-		}]
+		}],
+		order: [[ContentSchema, 'updatedAt', 'DESC']],
 	});
 };
 

@@ -10,7 +10,7 @@ const postCollectionSchema = Joi.object({
 	}),
 	body: Joi.array().items(Joi.object({
 		contentSchemaId: Joi.number().required(),
-		value: Joi.string().required()
+		value: Joi.string().allow('')
 	}))
 });
 
@@ -20,7 +20,8 @@ const editCollectionSchema = Joi.object({
 	}),
 	body: Joi.array().items(Joi.object({
 		contentSchemaId: Joi.number().required(),
-		value: Joi.string().required()
+		// allow empty string
+		value: Joi.string().allow('')
 	}))
 });
 

@@ -1,4 +1,4 @@
-const { Collection, CollectionValue } = require('../models');
+const { Collection, CollectionValue, ContentSchema } = require('../models');
 
 const getAllCollections = async (contentTypeId, userId) => {
 	return await Collection.findAll({
@@ -7,8 +7,13 @@ const getAllCollections = async (contentTypeId, userId) => {
 		include: [{
 			model: CollectionValue,
 			attributes: ['id', 'value'],
+			include: [{
+				model: ContentSchema,
+				attributes: ['id'],
+			}],
 			required: false,
-		}]
+		}],
+		order: [[CollectionValue, 'updatedAt', 'DESC']],
 	});
 };
 
